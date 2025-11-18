@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+    <h1>{{title}}</h1>
+    <p>{{ description }}</p>
+    <ul>
+    {% for fruit in fruits %}
+    <li>{{ fruit }}</li>
+    {% endfor %}
+    </ul>
+{% endblock %}
