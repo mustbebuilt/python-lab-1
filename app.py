@@ -1,5 +1,5 @@
 # Import the flask class and create an instance of it
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from config import db_config
 import mysql.connector
 
@@ -44,6 +44,16 @@ def db_data():
     
     # Pass data to template
     return render_template('db_data.html', data=data)
+
+@app.route('/api/staff')
+def get_staff_json():
+    conn = mysql.connector.connect(**db_config)
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM staff")
+    rows = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return jsonify(rows)
 
 # Run the app in debug mode
 if __name__ == '__main__':
